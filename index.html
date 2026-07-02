@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanjay Venkat S — Generative AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#09090b;
+  --surface:#141416;
+  --border:#23232a;
+  --text:#fafafa;
+  --text2:#a1a1aa;
+  --text3:#52525b;
+  --blue:#3b82f6;
+  --blue-bg:rgba(59,130,246,.08);
+  --blue-border:rgba(59,130,246,.2);
+  --green:#22c55e;
+  --mono:'JetBrains Mono',monospace;
+}
+
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--blue);text-decoration:none;transition:opacity .15s}
+a:hover{opacity:.8}
+::selection{background:var(--blue);color:#fff}
+
+/* ── Layout ── */
+.wrap{max-width:680px;margin:0 auto;padding:0 1.5rem}
+section{padding:3.5rem 0}
+.rule{height:1px;background:var(--border)}
+
+/* ── Nav ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(9,9,11,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+nav .inner{max-width:680px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-name{font-weight:700;font-size:.95rem;letter-spacing:-.01em}
+.nav-links{display:flex;gap:1.5rem;align-items:center}
+.nav-links a{color:var(--text2);font-size:.8rem;font-weight:500}
+.nav-links a:hover{color:var(--text);opacity:1}
+.nav-links .cta{color:var(--bg);background:var(--text);padding:6px 14px;border-radius:6px;font-weight:600;font-size:.78rem}
+.nav-links .cta:hover{opacity:.9}
+@media(max-width:600px){.nav-links a:not(.cta){display:none}}
+
+/* ── Hero ── */
+.hero{padding:7.5rem 0 3rem}
+.hero .label{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;font-weight:500;color:var(--green);margin-bottom:1.5rem;letter-spacing:.03em;text-transform:uppercase}
+.hero .label::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%}
+.hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;line-height:1.15;letter-spacing:-.03em;margin-bottom:1rem}
+.hero h1 em{font-style:normal;color:var(--text2)}
+.hero p{color:var(--text2);font-size:1.05rem;line-height:1.7;max-width:560px;margin-bottom:2rem}
+.hero-links{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.hero-links a{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:.85rem;font-weight:600;transition:all .15s}
+.hero-links .primary{background:var(--blue);color:#fff}
+.hero-links .primary:hover{background:#2563eb;opacity:1}
+.hero-links .ghost{border:1px solid var(--border);color:var(--text2)}
+.hero-links .ghost:hover{border-color:var(--text3);color:var(--text);opacity:1}
+
+/* ── Stats bar ── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.stat{padding:1rem;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-val{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:2px}
+.stat-lbl{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);font-weight:500}
+@media(max-width:500px){.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:none}.stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--border)}}
+
+/* ── Section headers ── */
+.sh{margin-bottom:2rem}
+.sh-label{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);margin-bottom:.5rem}
+.sh-title{font-size:1.4rem;font-weight:700;letter-spacing:-.02em}
+
+/* ── Experience ── */
+.exp-item{display:grid;grid-template-columns:140px 1fr;gap:1.5rem;padding:1.5rem 0;border-bottom:1px solid var(--border)}
+.exp-item:last-child{border-bottom:none}
+.exp-date{font-family:var(--mono);font-size:.78rem;color:var(--text3);padding-top:3px}
+.exp-current{color:var(--green)}
+.exp-role{font-weight:700;font-size:1rem;margin-bottom:2px}
+.exp-co{color:var(--text2);font-size:.9rem;margin-bottom:.6rem}
+.exp-points{list-style:none;display:flex;flex-direction:column;gap:.35rem}
+.exp-points li{font-size:.88rem;color:var(--text2);line-height:1.55;padding-left:1rem;position:relative}
+.exp-points li::before{content:'›';position:absolute;left:0;color:var(--text3)}
+@media(max-width:600px){.exp-item{grid-template-columns:1fr;gap:.4rem}.exp-date{font-size:.72rem}}
+
+/* ── Projects ── */
+.proj{padding:1.25rem 0;border-bottom:1px solid var(--border)}
+.proj:last-child{border-bottom:none}
+.proj-top{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:.4rem;flex-wrap:wrap}
+.proj-name{font-weight:700;font-size:1rem}
+.proj-badges{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap}
+.proj-badge{font-family:var(--mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;padding:3px 8px;border-radius:4px;font-weight:600;white-space:nowrap}
+.proj-badge.prod{color:var(--green);background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.12)}
+.proj-badge.oss{color:var(--blue);background:var(--blue-bg);border:1px solid var(--blue-border)}
+.proj-badge.sec{color:#f43f5e;background:rgba(244,63,94,.06);border:1px solid rgba(244,63,94,.1)}
+.proj-badge.pvt{color:var(--text2);background:rgba(255,255,255,.04);border:1px solid var(--border)}
+.proj-badge.pvt::before{content:'🔒 ';font-size:.55rem}
+.proj-desc{color:var(--text2);font-size:.88rem;line-height:1.6;margin-bottom:.6rem}
+.proj-meta{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.proj-metric{font-family:var(--mono);font-size:.72rem;color:var(--text3);background:var(--surface);padding:3px 8px;border-radius:4px;border:1px solid var(--border)}
+.proj-metric b{color:var(--text);font-weight:600}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
+.proj-tag{font-family:var(--mono);font-size:.65rem;color:var(--blue);padding:2px 7px;border-radius:3px;background:var(--blue-bg);border:1px solid var(--blue-border)}
+
+/* ── Skills ── */
+.skill-group{margin-bottom:1.25rem}
+.skill-label{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:.5rem;font-weight:500}
+.skill-list{display:flex;flex-wrap:wrap;gap:.4rem}
+.skill{font-size:.8rem;padding:5px 10px;border-radius:5px;color:var(--blue);background:var(--blue-bg);border:1px solid var(--blue-border);font-weight:500;transition:all .15s}
+.skill:hover{background:rgba(59,130,246,.14);border-color:rgba(59,130,246,.35)}
+
+/* ── Education ── */
+.edu-row{display:flex;justify-content:space-between;align-items:baseline;padding:.85rem 0;border-bottom:1px solid var(--border);gap:1rem}
+.edu-row:last-child{border-bottom:none}
+.edu-left{flex:1;min-width:0}
+.edu-deg{font-weight:600;font-size:.92rem;margin-bottom:1px}
+.edu-school{color:var(--text2);font-size:.85rem}
+.edu-detail{font-family:var(--mono);font-size:.75rem;color:var(--text3);white-space:nowrap;text-align:right;flex-shrink:0}
+@media(max-width:500px){.edu-row{flex-direction:column;gap:.2rem}.edu-detail{text-align:left}}
+
+/* ── Contact ── */
+.contact-row{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
+.contact-item{padding:1rem 1.15rem;border:1px solid var(--border);border-radius:8px;transition:border-color .15s;display:block}
+.contact-item:hover{border-color:var(--text3)}
+.contact-item .c-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:4px;font-weight:500;font-family:var(--mono)}
+.contact-item .c-value{font-size:.88rem;font-weight:600;color:var(--text);word-break:break-all}
+@media(max-width:500px){.contact-row{grid-template-columns:1fr}}
+
+/* ── Footer ── */
+footer{padding:2.5rem 0;border-top:1px solid var(--border)}
+footer .inner{max-width:680px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+footer .left{font-size:.78rem;color:var(--text3)}
+footer .right{display:flex;gap:1.25rem}
+footer .right a{font-size:.78rem;color:var(--text3);font-weight:500}
+footer .right a:hover{color:var(--text);opacity:1}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <div class="nav-name">Sanjay Venkat S</div>
+    <div class="nav-links">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact" class="cta">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ── Hero ── -->
+<section class="hero" id="home">
+  <div class="label">Open to opportunities</div>
+  <h1>Generative AI Engineer <em>building production LLM systems</em></h1>
+  <p>Two years shipping RAG pipelines, Vision-Language Models, and LLM evaluation frameworks at EY and HCLTech — deployed on Azure and AWS at enterprise scale.</p>
+  <div class="hero-links">
+    <a href="mailto:sanjayvenkat.san5@gmail.com" class="primary">Get in touch</a>
+    <a href="https://github.com/sanjay-venkat" target="_blank" class="ghost">GitHub</a>
+    <a href="https://www.linkedin.com/in/sanjay-venkat-s" target="_blank" class="ghost">LinkedIn</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-val">600+</div><div class="stat-lbl">Queries Automated</div></div>
+    <div class="stat"><div class="stat-val">5×</div><div class="stat-lbl">Throughput Gain</div></div>
+    <div class="stat"><div class="stat-val">93%</div><div class="stat-lbl">Detection Accuracy</div></div>
+    <div class="stat"><div class="stat-val">28%</div><div class="stat-lbl">Latency Reduced</div></div>
+  </div>
+</section>
+
+</div><div class="rule"></div><div class="wrap">
+
+<!-- ── Experience ── -->
+<section id="experience">
+  <div class="sh">
+    <div class="sh-label">Experience</div>
+    <div class="sh-title">Where I've shipped</div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-date exp-current">Nov 2025 — Now</div>
+    <div>
+      <div class="exp-role">AI Engineer (Advance Associate)</div>
+      <div class="exp-co">EY GDS</div>
+      <ul class="exp-points">
+        <li>Built a RAG system answering 600+ audit questions from PDFs with reranking and parallel multi-LLM inference — 5× throughput, 28% lower latency</li>
+        <li>Designed VLM pipeline extracting structured tables from unstructured PDFs using Azure Document Intelligence</li>
+        <li>Led LLM red-teaming with Ragas, DeepEval, and PyRIT — monitoring hallucination, prompt injection, and drift</li>
+        <li>Deployed all pipelines as FastAPI services on Azure Functions</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-date">Jul 2024 — Oct 2025</div>
+    <div>
+      <div class="exp-role">Senior Software Engineer</div>
+      <div class="exp-co">HCLTech</div>
+      <ul class="exp-points">
+        <li>Production document intelligence pipeline — object detection + OCR + table extraction at 93% accuracy</li>
+        <li>Deployed VLM models on edge devices using C++, ONNX for real-time document processing</li>
+        <li>Built enterprise LLM features: summarization, RAG search, prompt-based test generation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-date">Feb 2024 — Jul 2024</div>
+    <div>
+      <div class="exp-role">Academic Trainee</div>
+      <div class="exp-co">HCLTech</div>
+      <ul class="exp-points">
+        <li>Deep learning models for document quality analysis and noise classification</li>
+        <li>GAN-based document restoration — removing background noise from scanned documents</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div><div class="rule"></div><div class="wrap">
+
+<!-- ── Projects ── -->
+<section id="projects">
+  <div class="sh">
+    <div class="sh-label">Projects</div>
+    <div class="sh-title">What I've built</div>
+  </div>
+
+  <!-- 1 -->
+  <div class="proj">
+    <div class="proj-top">
+      <div class="proj-name">AuditLens AI</div>
+      <div class="proj-badges">
+        <span class="proj-badge prod">Production</span>
+        <span class="proj-badge pvt">Private</span>
+      </div>
+    </div>
+    <div class="proj-desc">Enterprise RAG system automating 600+ audit queries from PDF documents. Hybrid retrieval with reranking, parallel inference across multiple LLM instances, deployed as FastAPI microservices on Azure Functions.</div>
+    <div class="proj-meta">
+      <span class="proj-metric"><b>600+</b> queries</span>
+      <span class="proj-metric"><b>5×</b> throughput</span>
+      <span class="proj-metric"><b>−28%</b> latency</span>
+    </div>
+    <div class="proj-tags"><span class="proj-tag">Azure OpenAI</span><span class="proj-tag">LangChain</span><span class="proj-tag">FastAPI</span><span class="proj-tag">Reranking</span><span class="proj-tag">Azure Functions</span></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="proj">
+    <div class="proj-top">
+      <div class="proj-name">DocForge VLM</div>
+      <div class="proj-badges">
+        <span class="proj-badge prod">Production</span>
+        <span class="proj-badge pvt">Private</span>
+      </div>
+    </div>
+    <div class="proj-desc">Multi-modal pipeline using Vision-Language Models for structured table extraction from unstructured PDFs. Edge-deployable variant using C++ and ONNX for real-time processing on embedded hardware.</div>
+    <div class="proj-meta">
+      <span class="proj-metric"><b>93%</b> accuracy</span>
+      <span class="proj-metric"><b>Edge</b> deployed</span>
+      <span class="proj-metric"><b>RT</b> processing</span>
+    </div>
+    <div class="proj-tags"><span class="proj-tag">Azure Doc Intel</span><span class="proj-tag">GPT-4V</span><span class="proj-tag">C++</span><span class="proj-tag">ONNX</span><span class="proj-tag">YOLO</span><span class="proj-tag">OCR</span></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="proj">
+    <div class="proj-top">
+      <div class="proj-name">LLM RedTeam Suite</div>
+      <div class="proj-badges">
+        <span class="proj-badge sec">AI Safety</span>
+        <span class="proj-badge pvt">Private</span>
+      </div>
+    </div>
+    <div class="proj-desc">Evaluation and red-teaming framework tracking hallucination, prompt injection, and model drift in production LLM deployments. Automated adversarial testing pipelines with continuous monitoring.</div>
+    <div class="proj-meta">
+      <span class="proj-metric"><b>3</b> eval engines</span>
+      <span class="proj-metric"><b>24/7</b> monitoring</span>
+      <span class="proj-metric"><b>Prod</b> deployed</span>
+    </div>
+    <div class="proj-tags"><span class="proj-tag">Ragas</span><span class="proj-tag">DeepEval</span><span class="proj-tag">PyRIT</span><span class="proj-tag">Langfuse</span><span class="proj-tag">Red-teaming</span></div>
+  </div>
+
+  <!-- 4 — NEW -->
+  <div class="proj">
+    <div class="proj-top">
+      <div class="proj-name">AgentFlow — Multi-Agent Orchestrator</div>
+      <div class="proj-badges">
+        <span class="proj-badge prod">Production</span>
+        <span class="proj-badge pvt">Private</span>
+      </div>
+    </div>
+    <div class="proj-desc">Multi-agent pipeline coordinating specialized LLM agents across enterprise workflows using LangGraph. Agents handle document routing, question analysis, answer synthesis, and quality verification in a DAG with human-in-the-loop checkpoints.</div>
+    <div class="proj-meta">
+      <span class="proj-metric"><b>DAG</b> architecture</span>
+      <span class="proj-metric"><b>4</b> agent nodes</span>
+      <span class="proj-metric"><b>HITL</b> enabled</span>
+    </div>
+    <div class="proj-tags"><span class="proj-tag">LangGraph</span><span class="proj-tag">LangChain</span><span class="proj-tag">Azure OpenAI</span><span class="proj-tag">FastAPI</span><span class="proj-tag">Async Agents</span></div>
+  </div>
+
+  <!-- 5 — NEW -->
+  <div class="proj">
+    <div class="proj-top">
+      <div class="proj-name">TestGen AI — Automated Test Case Generator</div>
+      <div class="proj-badges">
+        <span class="proj-badge prod">Production</span>
+        <span class="proj-badge pvt">Private</span>
+      </div>
+    </div>
+    <div class="proj-desc">Prompt-engineered LLM system generating structured test cases from software requirements. Reduced manual testing effort by automating scenario generation, edge-case identification, and acceptance criteria extraction for enterprise QA workflows.</div>
+    <div class="proj-meta">
+      <span class="proj-metric"><b>70%</b> effort saved</span>
+      <span class="proj-metric"><b>Enterprise</b> QA</span>
+    </div>
+    <div class="proj-tags"><span class="proj-tag">OpenAI API</span><span class="proj-tag">Prompt Engineering</span><span class="proj-tag">FastAPI</span><span class="proj-tag">Structured Output</span></div>
+  </div>
+
+  <!-- 6 — NEW -->
+  <div class="proj">
+    <div class="proj-top">
+      <div class="proj-name">Enterprise Semantic Search Engine</div>
+      <div class="proj-badges">
+        <span class="proj-badge prod">Production</span>
+        <span class="proj-badge pvt">Private</span>
+      </div>
+    </div>
+    <div class="proj-desc">Vector-based semantic search system indexing thousands of internal documents with hybrid BM25 + dense retrieval. Powers natural language querying across enterprise knowledge bases with contextual reranking and source attribution.</div>
+    <div class="proj-meta">
+      <span class="proj-metric"><b>Hybrid</b> retrieval</span>
+      <span class="proj-metric"><b>1000s</b> documents</span>
+    </div>
+    <div class="proj-tags"><span class="proj-tag">Vector DB</span><span class="proj-tag">BM25</span><span class="proj-tag">Embeddings</span><span class="proj-tag">Reranking</span><span class="proj-tag">FastAPI</span></div>
+  </div>
+
+  <!-- 7 — NEW -->
+  <div class="proj">
+    <div class="proj-top">
+      <div class="proj-name">LLM Summarization Pipeline</div>
+      <div class="proj-badges">
+        <span class="proj-badge prod">Production</span>
+        <span class="proj-badge pvt">Private</span>
+      </div>
+    </div>
+    <div class="proj-desc">Enterprise document summarization system handling long-form PDFs, contracts, and audit reports. Implements recursive chunking with map-reduce summarization and configurable detail levels for different stakeholders.</div>
+    <div class="proj-meta">
+      <span class="proj-metric"><b>Long-form</b> docs</span>
+      <span class="proj-metric"><b>Map-Reduce</b> pattern</span>
+    </div>
+    <div class="proj-tags"><span class="proj-tag">LangChain</span><span class="proj-tag">Azure OpenAI</span><span class="proj-tag">Recursive Chunking</span><span class="proj-tag">PDF Parsing</span></div>
+  </div>
+
+  <!-- 8 -->
+  <div class="proj">
+    <div class="proj-top">
+      <div class="proj-name">DocNoise GAN</div>
+      <div class="proj-badges">
+        <span class="proj-badge prod">Research</span>
+        <span class="proj-badge pvt">Private</span>
+      </div>
+    </div>
+    <div class="proj-desc">GAN-based restoration model removing background noise, stains, and artifacts from scanned documents. Paired with a noise classifier for automated preprocessing in document intelligence pipelines.</div>
+    <div class="proj-tags"><span class="proj-tag">PyTorch</span><span class="proj-tag">GANs</span><span class="proj-tag">OpenCV</span><span class="proj-tag">Image Processing</span></div>
+  </div>
+
+  <!-- 9 -->
+  <div class="proj">
+    <div class="proj-top">
+      <div class="proj-name">HoneyPot SPY</div>
+      <div class="proj-badges">
+        <span class="proj-badge oss">Open Source</span>
+      </div>
+    </div>
+    <div class="proj-desc">Honeypot-based behavioral analysis system modeling attacker activity as finite-state machine transitions with anomaly alerting from session behavior graphs.</div>
+    <div class="proj-meta">
+      <a href="https://github.com/sanjay-venkat/Honey_Pot_SPY" target="_blank" style="font-family:var(--mono);font-size:.72rem">View on GitHub →</a>
+    </div>
+    <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">FSM</span><span class="proj-tag">Anomaly Detection</span><span class="proj-tag">Network Security</span></div>
+  </div>
+
+  <!-- 10 -->
+  <div class="proj">
+    <div class="proj-top">
+      <div class="proj-name">Shopify Insights Fetcher</div>
+      <div class="proj-badges">
+        <span class="proj-badge oss">Open Source</span>
+      </div>
+    </div>
+    <div class="proj-desc">FastAPI backend scraping Shopify stores and extracting structured brand/product data via local LLM, returned as clean JSON.</div>
+    <div class="proj-meta">
+      <a href="https://github.com/sanjay-venkat/Shopify-Insights-Fetcher" target="_blank" style="font-family:var(--mono);font-size:.72rem">View on GitHub →</a>
+    </div>
+    <div class="proj-tags"><span class="proj-tag">FastAPI</span><span class="proj-tag">Ollama</span><span class="proj-tag">Web Scraping</span><span class="proj-tag">Structured Output</span></div>
+  </div>
+
+  <!-- 11 -->
+  <div class="proj">
+    <div class="proj-top">
+      <div class="proj-name">Support Bot — RAG</div>
+      <div class="proj-badges">
+        <span class="proj-badge oss">Open Source</span>
+      </div>
+    </div>
+    <div class="proj-desc">Document Q&A chatbot using Retrieval-Augmented Generation over custom knowledge bases with source attribution.</div>
+    <div class="proj-meta">
+      <a href="https://github.com/sanjay-venkat/Support-Bot" target="_blank" style="font-family:var(--mono);font-size:.72rem">View on GitHub →</a>
+    </div>
+    <div class="proj-tags"><span class="proj-tag">LangChain</span><span class="proj-tag">Vector DB</span><span class="proj-tag">Embeddings</span><span class="proj-tag">Python</span></div>
+  </div>
+
+</section>
+
+</div><div class="rule"></div><div class="wrap">
+
+<!-- ── Skills ── -->
+<section id="skills">
+  <div class="sh">
+    <div class="sh-label">Skills</div>
+    <div class="sh-title">Technical stack</div>
+  </div>
+
+  <div class="skill-group">
+    <div class="skill-label">Generative AI & LLMs</div>
+    <div class="skill-list">
+      <span class="skill">RAG Pipelines</span>
+      <span class="skill">LangChain</span>
+      <span class="skill">LangGraph</span>
+      <span class="skill">Prompt Engineering</span>
+      <span class="skill">LLM Fine-tuning</span>
+      <span class="skill">Multi-Agent Pipelines</span>
+      <span class="skill">Azure OpenAI</span>
+      <span class="skill">Amazon Bedrock</span>
+      <span class="skill">Ollama</span>
+    </div>
+  </div>
+
+  <div class="skill-group">
+    <div class="skill-label">AI Evaluation & Safety</div>
+    <div class="skill-list">
+      <span class="skill">Ragas</span>
+      <span class="skill">DeepEval</span>
+      <span class="skill">PyRIT</span>
+      <span class="skill">Langfuse</span>
+      <span class="skill">RAG Evaluation</span>
+      <span class="skill">Red-Teaming</span>
+      <span class="skill">Model Benchmarking</span>
+    </div>
+  </div>
+
+  <div class="skill-group">
+    <div class="skill-label">ML & Deep Learning</div>
+    <div class="skill-list">
+      <span class="skill">PyTorch</span>
+      <span class="skill">TensorFlow</span>
+      <span class="skill">YOLO</span>
+      <span class="skill">Computer Vision</span>
+      <span class="skill">GANs</span>
+      <span class="skill">Neural Networks</span>
+    </div>
+  </div>
+
+  <div class="skill-group">
+    <div class="skill-label">Languages & Deployment</div>
+    <div class="skill-list">
+      <span class="skill">Python</span>
+      <span class="skill">C++</span>
+      <span class="skill">FastAPI</span>
+      <span class="skill">Azure Functions</span>
+      <span class="skill">Docker</span>
+      <span class="skill">ONNX</span>
+      <span class="skill">Azure</span>
+      <span class="skill">AWS</span>
+      <span class="skill">Git</span>
+      <span class="skill">Linux</span>
+    </div>
+  </div>
+</section>
+
+</div><div class="rule"></div><div class="wrap">
+
+<!-- ── Education ── -->
+<section id="education">
+  <div class="sh">
+    <div class="sh-label">Education & Credentials</div>
+  </div>
+
+  <div class="edu-row">
+    <div class="edu-left">
+      <div class="edu-deg">M.Tech — Cloud Computing & Blockchain</div>
+      <div class="edu-school">SRM Institute of Science and Technology</div>
+    </div>
+    <div class="edu-detail">2025 — Present · 9.5 GPA</div>
+  </div>
+  <div class="edu-row">
+    <div class="edu-left">
+      <div class="edu-deg">B.Tech — AI and Data Science</div>
+      <div class="edu-school">Sri Sairam Engineering College</div>
+    </div>
+    <div class="edu-detail">2020 — 2024 · 8.92 GPA</div>
+  </div>
+  <div class="edu-row">
+    <div class="edu-left">
+      <div class="edu-deg">IEEE Publication</div>
+      <div class="edu-school">Traffic Density Estimation — ICCST 2022</div>
+    </div>
+    <div class="edu-detail">IEEE Xplore · 2023</div>
+  </div>
+  <div class="edu-row">
+    <div class="edu-left">
+      <div class="edu-deg">Certifications</div>
+      <div class="edu-school">GenAI with LLMs (Coursera) · NPTEL: ML, Deep Learning, Data Science</div>
+    </div>
+    <div class="edu-detail">2023 — 2024</div>
+  </div>
+</section>
+
+</div><div class="rule"></div><div class="wrap">
+
+<!-- ── Contact ── -->
+<section id="contact">
+  <div class="sh">
+    <div class="sh-label">Get in touch</div>
+    <div class="sh-title">Let's work together</div>
+  </div>
+
+  <div class="contact-row">
+    <a href="mailto:sanjayvenkat.san5@gmail.com" class="contact-item">
+      <div class="c-label">Email</div>
+      <div class="c-value">sanjayvenkat.san5@gmail.com</div>
+    </a>
+    <a href="tel:+918248695775" class="contact-item">
+      <div class="c-label">Phone</div>
+      <div class="c-value">+91 82486 95775</div>
+    </a>
+    <a href="https://www.linkedin.com/in/sanjay-venkat-s" target="_blank" class="contact-item">
+      <div class="c-label">LinkedIn</div>
+      <div class="c-value">sanjay-venkat-s</div>
+    </a>
+    <a href="https://github.com/sanjay-venkat" target="_blank" class="contact-item">
+      <div class="c-label">GitHub</div>
+      <div class="c-value">sanjay-venkat</div>
+    </a>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="inner">
+    <div class="left">© 2026 Sanjay Venkat S · Chennai, India</div>
+    <div class="right">
+      <a href="mailto:sanjayvenkat.san5@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/sanjay-venkat-s" target="_blank">LinkedIn</a>
+      <a href="https://github.com/sanjay-venkat" target="_blank">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
