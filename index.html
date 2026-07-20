@@ -5,139 +5,247 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sanjay Venkat S — Generative AI Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-
 :root{
-  --bg:#09090b;
-  --surface:#141416;
-  --border:#23232a;
-  --text:#fafafa;
-  --text2:#a1a1aa;
-  --text3:#52525b;
-  --blue:#3b82f6;
-  --blue-bg:rgba(59,130,246,.08);
-  --blue-border:rgba(59,130,246,.2);
-  --green:#22c55e;
+  --bg:#06060a;--surface:rgba(255,255,255,.03);--glass:rgba(255,255,255,.05);
+  --border:rgba(255,255,255,.08);--text:#f0f0f5;--text2:#8a8a9a;--text3:#4a4a5a;
+  --blue:#3b82f6;--purple:#8b5cf6;--cyan:#06b6d4;--pink:#ec4899;
+  --amber:#f59e0b;--green:#22c55e;--rose:#f43f5e;
   --mono:'JetBrains Mono',monospace;
+  --grad1:linear-gradient(135deg,#3b82f6,#8b5cf6);
+  --grad2:linear-gradient(135deg,#06b6d4,#3b82f6);
+  --grad3:linear-gradient(135deg,#8b5cf6,#ec4899);
+  --grad4:linear-gradient(135deg,#f59e0b,#f43f5e);
 }
-
 html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{color:var(--blue);text-decoration:none;transition:opacity .15s}
-a:hover{opacity:.8}
-::selection{background:var(--blue);color:#fff}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--purple);color:#fff}
 
-/* ── Layout ── */
-.wrap{max-width:680px;margin:0 auto;padding:0 1.5rem}
-section{padding:3.5rem 0}
-.rule{height:1px;background:var(--border)}
+/* ── Scroll Progress ── */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;background:var(--grad1);z-index:200;width:0%;transition:width .1s}
+
+/* ── Animated BG ── */
+.bg-mesh{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.bg-mesh .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.12;animation:orbFloat 20s ease-in-out infinite}
+.bg-mesh .orb-1{width:600px;height:600px;background:var(--purple);top:-10%;left:-10%;animation-delay:0s}
+.bg-mesh .orb-2{width:500px;height:500px;background:var(--blue);bottom:-5%;right:-10%;animation-delay:-7s}
+.bg-mesh .orb-3{width:400px;height:400px;background:var(--cyan);top:40%;left:50%;animation-delay:-14s}
+.bg-mesh .orb-4{width:350px;height:350px;background:var(--pink);top:20%;right:20%;animation-delay:-3s}
+.bg-mesh .orb-5{width:300px;height:300px;background:var(--amber);bottom:20%;left:30%;animation-delay:-10s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-50px) scale(1.1)}66%{transform:translate(-30px,40px) scale(.9)}}
+
+/* ── Grid Overlay ── */
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.02) 1px,transparent 1px);
+  background-size:32px 32px}
+
+/* ── Neural SVG ── */
+.neural-bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.04}
+.neural-bg svg{width:100%;height:100%}
+
+/* ── Main ── */
+main{position:relative;z-index:1}
+.wrap{max-width:760px;margin:0 auto;padding:0 2rem}
+section{padding:5rem 0}
 
 /* ── Nav ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(9,9,11,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-nav .inner{max-width:680px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:56px}
-.nav-name{font-weight:700;font-size:.95rem;letter-spacing:-.01em}
-.nav-links{display:flex;gap:1.5rem;align-items:center}
-.nav-links a{color:var(--text2);font-size:.8rem;font-weight:500}
-.nav-links a:hover{color:var(--text);opacity:1}
-.nav-links .cta{color:var(--bg);background:var(--text);padding:6px 14px;border-radius:6px;font-weight:600;font-size:.78rem}
-.nav-links .cta:hover{opacity:.9}
-@media(max-width:600px){.nav-links a:not(.cta){display:none}}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(20px);background:rgba(6,6,10,.6);border-bottom:1px solid var(--border)}
+nav .inner{max-width:760px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-name{font-weight:800;font-size:1rem;letter-spacing:-.02em;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:1.25rem;align-items:center}
+.nav-links a{color:var(--text2);font-size:.8rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--grad1);color:#fff;padding:7px 18px;border-radius:8px;font-size:.78rem;font-weight:700;transition:all .2s;letter-spacing:.01em}
+.nav-cta:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 4px 20px rgba(59,130,246,.3)}
+@media(max-width:640px){.nav-links a:not(.nav-cta){display:none}}
 
 /* ── Hero ── */
-.hero{padding:7.5rem 0 3rem}
-.hero .label{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;font-weight:500;color:var(--green);margin-bottom:1.5rem;letter-spacing:.03em;text-transform:uppercase}
-.hero .label::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%}
-.hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;line-height:1.15;letter-spacing:-.03em;margin-bottom:1rem}
-.hero h1 em{font-style:normal;color:var(--text2)}
-.hero p{color:var(--text2);font-size:1.05rem;line-height:1.7;max-width:560px;margin-bottom:2rem}
-.hero-links{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:2.5rem}
-.hero-links a{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:.85rem;font-weight:600;transition:all .15s}
-.hero-links .primary{background:var(--blue);color:#fff}
-.hero-links .primary:hover{background:#2563eb;opacity:1}
-.hero-links .ghost{border:1px solid var(--border);color:var(--text2)}
-.hero-links .ghost:hover{border-color:var(--text3);color:var(--text);opacity:1}
+.hero{padding:8rem 0 4rem;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:var(--green);font-size:.75rem;font-weight:600;padding:6px 16px;border-radius:100px;margin-bottom:2rem;letter-spacing:.03em;text-transform:uppercase}
+.hero-badge .dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:clamp(2.4rem,5.5vw,3.8rem);font-weight:900;line-height:1.1;letter-spacing:-.04em;margin-bottom:1rem}
+.hero h1 .grad{background:linear-gradient(135deg,var(--blue),var(--purple),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% 200%;animation:gradShift 4s ease infinite}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero .typed-wrap{min-height:1.8rem;margin-bottom:1.5rem}
+.hero .typed{font-family:var(--mono);font-size:.95rem;color:var(--cyan)}
+.hero .cursor{display:inline-block;width:2px;height:1.1em;background:var(--cyan);margin-left:2px;animation:cursorBlink .7s infinite}
+@keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
+.hero p{color:var(--text2);font-size:1.05rem;line-height:1.7;max-width:580px;margin:0 auto 2.5rem}
+.hero-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:3.5rem}
+.btn{padding:10px 22px;border-radius:10px;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .25s;border:none;display:inline-flex;align-items:center;gap:8px}
+.btn-grad{background:var(--grad1);color:#fff;box-shadow:0 4px 25px rgba(59,130,246,.2)}
+.btn-grad:hover{transform:translateY(-2px);box-shadow:0 8px 35px rgba(59,130,246,.35)}
+.btn-glass{background:var(--glass);color:var(--text);border:1px solid var(--border);backdrop-filter:blur(10px)}
+.btn-glass:hover{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.08);transform:translateY(-2px)}
 
-/* ── Stats bar ── */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:10px;overflow:hidden}
-.stat{padding:1rem;text-align:center;border-right:1px solid var(--border)}
-.stat:last-child{border-right:none}
-.stat-val{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:2px}
-.stat-lbl{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);font-weight:500}
-@media(max-width:500px){.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:none}.stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--border)}}
+/* ── Stats ── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:14px;overflow:hidden;border:1px solid var(--border)}
+.stat{background:rgba(6,6,10,.8);backdrop-filter:blur(10px);padding:1.25rem;text-align:center}
+.stat-val{font-family:var(--mono);font-size:1.6rem;font-weight:800;margin-bottom:4px}
+.stat-val.s1{color:var(--blue)}.stat-val.s2{color:var(--purple)}.stat-val.s3{color:var(--cyan)}.stat-val.s4{color:var(--pink)}
+.stat-lbl{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);font-weight:600}
+@media(max-width:520px){.stats{grid-template-columns:repeat(2,1fr)}}
 
-/* ── Section headers ── */
-.sh{margin-bottom:2rem}
-.sh-label{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);margin-bottom:.5rem}
-.sh-title{font-size:1.4rem;font-weight:700;letter-spacing:-.02em}
+/* ── Section Header ── */
+.sh{margin-bottom:2.5rem;text-align:center}
+.sh-label{font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.15em;margin-bottom:.5rem;display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:100px;border:1px solid var(--border);background:var(--glass)}
+.sh-label.c1{color:var(--blue)}.sh-label.c2{color:var(--purple)}.sh-label.c3{color:var(--cyan)}.sh-label.c4{color:var(--pink)}.sh-label.c5{color:var(--amber)}.sh-label.c6{color:var(--green)}
+.sh-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-top:.75rem}
+
+/* ── Divider ── */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);max-width:760px;margin:0 auto}
 
 /* ── Experience ── */
-.exp-item{display:grid;grid-template-columns:140px 1fr;gap:1.5rem;padding:1.5rem 0;border-bottom:1px solid var(--border)}
-.exp-item:last-child{border-bottom:none}
-.exp-date{font-family:var(--mono);font-size:.78rem;color:var(--text3);padding-top:3px}
-.exp-current{color:var(--green)}
-.exp-role{font-weight:700;font-size:1rem;margin-bottom:2px}
-.exp-co{color:var(--text2);font-size:.9rem;margin-bottom:.6rem}
-.exp-points{list-style:none;display:flex;flex-direction:column;gap:.35rem}
-.exp-points li{font-size:.88rem;color:var(--text2);line-height:1.55;padding-left:1rem;position:relative}
-.exp-points li::before{content:'›';position:absolute;left:0;color:var(--text3)}
-@media(max-width:600px){.exp-item{grid-template-columns:1fr;gap:.4rem}.exp-date{font-size:.72rem}}
+.exp-item{position:relative;padding:1.75rem;margin-bottom:1rem;border-radius:14px;border:1px solid var(--border);background:var(--glass);backdrop-filter:blur(8px);transition:all .3s}
+.exp-item:hover{border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.06)}
+.exp-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;flex-wrap:wrap;gap:.5rem}
+.exp-role{font-weight:800;font-size:1.05rem}
+.exp-badge{font-family:var(--mono);font-size:.65rem;padding:4px 10px;border-radius:6px;font-weight:600;letter-spacing:.03em}
+.exp-badge.current{background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.15)}
+.exp-badge.past{background:var(--glass);color:var(--text3);border:1px solid var(--border)}
+.exp-co{color:var(--text2);font-size:.9rem;margin-bottom:.75rem}
+.exp-co span{color:var(--text3);font-family:var(--mono);font-size:.78rem}
+.exp-points{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.exp-points li{font-size:.88rem;color:var(--text2);line-height:1.6;padding-left:1.2rem;position:relative}
+.exp-points li::before{content:'';position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--grad1)}
 
 /* ── Projects ── */
-.proj{padding:1.25rem 0;border-bottom:1px solid var(--border)}
-.proj:last-child{border-bottom:none}
-.proj-top{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:.4rem;flex-wrap:wrap}
-.proj-name{font-weight:700;font-size:1rem}
-.proj-badges{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap}
-.proj-badge{font-family:var(--mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;padding:3px 8px;border-radius:4px;font-weight:600;white-space:nowrap}
-.proj-badge.prod{color:var(--green);background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.12)}
-.proj-badge.oss{color:var(--blue);background:var(--blue-bg);border:1px solid var(--blue-border)}
-.proj-badge.sec{color:#f43f5e;background:rgba(244,63,94,.06);border:1px solid rgba(244,63,94,.1)}
-.proj-badge.pvt{color:var(--text2);background:rgba(255,255,255,.04);border:1px solid var(--border)}
-.proj-badge.pvt::before{content:'🔒 ';font-size:.55rem}
-.proj-desc{color:var(--text2);font-size:.88rem;line-height:1.6;margin-bottom:.6rem}
-.proj-meta{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
-.proj-metric{font-family:var(--mono);font-size:.72rem;color:var(--text3);background:var(--surface);padding:3px 8px;border-radius:4px;border:1px solid var(--border)}
-.proj-metric b{color:var(--text);font-weight:600}
-.proj-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
-.proj-tag{font-family:var(--mono);font-size:.65rem;color:var(--blue);padding:2px 7px;border-radius:3px;background:var(--blue-bg);border:1px solid var(--blue-border)}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1rem}
+@media(max-width:740px){.proj-grid{grid-template-columns:1fr}}
+.proj-card{border-radius:16px;border:1px solid var(--border);background:var(--glass);backdrop-filter:blur(8px);overflow:hidden;transition:all .35s;position:relative}
+.proj-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.12);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:.8}
+.proj-card.c1::before{background:var(--grad1)}.proj-card.c2::before{background:var(--grad2)}.proj-card.c3::before{background:var(--grad3)}.proj-card.c4::before{background:var(--grad4)}.proj-card.c5::before{background:linear-gradient(135deg,var(--green),var(--cyan))}.proj-card.c6::before{background:linear-gradient(135deg,var(--cyan),var(--purple))}
+.proj-inner{padding:1.5rem}
+.proj-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;gap:.5rem;flex-wrap:wrap}
+.proj-name{font-weight:800;font-size:1rem;letter-spacing:-.01em}
+.proj-badges{display:flex;gap:.35rem;flex-wrap:wrap}
+.proj-badge{font-family:var(--mono);font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;padding:3px 8px;border-radius:5px;font-weight:600;white-space:nowrap}
+.badge-prod{color:var(--green);background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.12)}
+.badge-oss{color:var(--blue);background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.12)}
+.badge-sec{color:var(--rose);background:rgba(244,63,94,.06);border:1px solid rgba(244,63,94,.1)}
+.badge-pvt{color:var(--text3);background:rgba(255,255,255,.03);border:1px solid var(--border)}
+.badge-pvt::before{content:'🔒 '}
+.badge-new{color:var(--amber);background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.12)}
+.proj-desc{color:var(--text2);font-size:.85rem;line-height:1.6;margin-bottom:.75rem}
+.proj-metrics{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem}
+.pm{font-family:var(--mono);font-size:.7rem;color:var(--text3);background:rgba(255,255,255,.03);padding:3px 8px;border-radius:5px;border:1px solid var(--border)}
+.pm b{font-weight:700}
+.pm.m1 b{color:var(--blue)}.pm.m2 b{color:var(--purple)}.pm.m3 b{color:var(--cyan)}.pm.m4 b{color:var(--pink)}.pm.m5 b{color:var(--amber)}.pm.m6 b{color:var(--green)}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.3rem}
+.ptag{font-family:var(--mono);font-size:.62rem;padding:3px 7px;border-radius:4px;font-weight:500;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.12);color:var(--blue)}
+.proj-link{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:.72rem;color:var(--blue);margin-top:.5rem;transition:all .2s}
+.proj-link:hover{color:var(--cyan)}
+
+/* ── FLAGSHIP PROJECT ── */
+.flagship{border:1px solid rgba(139,92,246,.2);background:linear-gradient(135deg,rgba(139,92,246,.04),rgba(59,130,246,.04));border-radius:18px;padding:2rem;margin-bottom:2rem;position:relative;overflow:hidden}
+.flagship::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--purple),var(--pink),var(--cyan));background-size:300% 100%;animation:gradShift 4s ease infinite}
+.flagship-label{font-family:var(--mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700;margin-bottom:.75rem;display:flex;align-items:center;gap:6px}
+.flagship-label::before{content:'⭐'}
+.flagship h3{font-size:1.3rem;font-weight:800;margin-bottom:.3rem;letter-spacing:-.02em}
+.flagship .sub{color:var(--text2);font-size:.88rem;margin-bottom:.75rem;line-height:1.6}
+.flagship .features{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1rem}
+@media(max-width:500px){.flagship .features{grid-template-columns:1fr}}
+.feat{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--text2)}
+.feat .ic{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0}
+.feat .ic.i1{background:rgba(59,130,246,.1);color:var(--blue)}
+.feat .ic.i2{background:rgba(139,92,246,.1);color:var(--purple)}
+.feat .ic.i3{background:rgba(6,182,212,.1);color:var(--cyan)}
+.feat .ic.i4{background:rgba(236,72,153,.1);color:var(--pink)}
+.feat .ic.i5{background:rgba(245,158,11,.1);color:var(--amber)}
+.feat .ic.i6{background:rgba(34,197,94,.1);color:var(--green)}
 
 /* ── Skills ── */
-.skill-group{margin-bottom:1.25rem}
-.skill-label{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:.5rem;font-weight:500}
-.skill-list{display:flex;flex-wrap:wrap;gap:.4rem}
-.skill{font-size:.8rem;padding:5px 10px;border-radius:5px;color:var(--blue);background:var(--blue-bg);border:1px solid var(--blue-border);font-weight:500;transition:all .15s}
-.skill:hover{background:rgba(59,130,246,.14);border-color:rgba(59,130,246,.35)}
+.skills-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:600px){.skills-wrap{grid-template-columns:1fr}}
+.skill-box{padding:1.25rem;border-radius:14px;border:1px solid var(--border);background:var(--glass);backdrop-filter:blur(8px)}
+.skill-box-title{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem;font-weight:600;display:flex;align-items:center;gap:6px}
+.skill-box-title .ico{width:20px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.6rem}
+.sbt1{color:var(--blue)}.sbt1 .ico{background:rgba(59,130,246,.1)}
+.sbt2{color:var(--rose)}.sbt2 .ico{background:rgba(244,63,94,.1)}
+.sbt3{color:var(--purple)}.sbt3 .ico{background:rgba(139,92,246,.1)}
+.sbt4{color:var(--cyan)}.sbt4 .ico{background:rgba(6,182,212,.1)}
+.stag{display:inline-flex;font-size:.78rem;padding:5px 10px;border-radius:6px;font-weight:500;margin:2px;transition:all .2s;cursor:default}
+.stag.t1{color:var(--blue);background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.12)}
+.stag.t2{color:var(--rose);background:rgba(244,63,94,.06);border:1px solid rgba(244,63,94,.1)}
+.stag.t3{color:var(--purple);background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.12)}
+.stag.t4{color:var(--cyan);background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.12)}
+.stag:hover{transform:translateY(-2px)}
 
 /* ── Education ── */
-.edu-row{display:flex;justify-content:space-between;align-items:baseline;padding:.85rem 0;border-bottom:1px solid var(--border);gap:1rem}
-.edu-row:last-child{border-bottom:none}
+.edu-card{padding:1.5rem;border-radius:14px;border:1px solid var(--border);background:var(--glass);backdrop-filter:blur(8px);margin-bottom:.75rem;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;transition:all .3s}
+.edu-card:hover{border-color:rgba(255,255,255,.12)}
 .edu-left{flex:1;min-width:0}
-.edu-deg{font-weight:600;font-size:.92rem;margin-bottom:1px}
+.edu-deg{font-weight:700;font-size:.95rem;margin-bottom:2px}
 .edu-school{color:var(--text2);font-size:.85rem}
-.edu-detail{font-family:var(--mono);font-size:.75rem;color:var(--text3);white-space:nowrap;text-align:right;flex-shrink:0}
-@media(max-width:500px){.edu-row{flex-direction:column;gap:.2rem}.edu-detail{text-align:left}}
+.edu-right{font-family:var(--mono);font-size:.75rem;color:var(--text3);text-align:right;flex-shrink:0;white-space:nowrap}
+@media(max-width:500px){.edu-card{flex-direction:column;gap:.3rem}.edu-right{text-align:left}}
 
 /* ── Contact ── */
-.contact-row{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
-.contact-item{padding:1rem 1.15rem;border:1px solid var(--border);border-radius:8px;transition:border-color .15s;display:block}
-.contact-item:hover{border-color:var(--text3)}
-.contact-item .c-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:4px;font-weight:500;font-family:var(--mono)}
-.contact-item .c-value{font-size:.88rem;font-weight:600;color:var(--text);word-break:break-all}
-@media(max-width:500px){.contact-row{grid-template-columns:1fr}}
+.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
+@media(max-width:500px){.contact-grid{grid-template-columns:1fr}}
+.cc{padding:1.15rem;border-radius:12px;border:1px solid var(--border);background:var(--glass);backdrop-filter:blur(8px);transition:all .3s;display:block}
+.cc:hover{border-color:rgba(255,255,255,.15);transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.3)}
+.cc-label{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;font-weight:600}
+.cc-label.l1{color:var(--blue)}.cc-label.l2{color:var(--purple)}.cc-label.l3{color:var(--cyan)}.cc-label.l4{color:var(--pink)}
+.cc-value{font-size:.88rem;font-weight:700;color:var(--text);word-break:break-all}
 
 /* ── Footer ── */
 footer{padding:2.5rem 0;border-top:1px solid var(--border)}
-footer .inner{max-width:680px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+footer .inner{max-width:760px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
 footer .left{font-size:.78rem;color:var(--text3)}
 footer .right{display:flex;gap:1.25rem}
-footer .right a{font-size:.78rem;color:var(--text3);font-weight:500}
-footer .right a:hover{color:var(--text);opacity:1}
+footer .right a{font-size:.78rem;color:var(--text3);font-weight:500;transition:color .2s}
+footer .right a:hover{color:var(--text)}
+
+/* ── Reveal ── */
+.reveal{opacity:0;transform:translateY(25px);transition:opacity .6s ease,transform .6s ease}
+.reveal.vis{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
 
+<div class="scroll-progress" id="scrollProg"></div>
+
+<!-- ── BG Layers ── -->
+<div class="bg-mesh">
+  <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+  <div class="orb orb-4"></div><div class="orb orb-5"></div>
+</div>
+<div class="bg-grid"></div>
+<div class="neural-bg">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <defs><radialGradient id="ng"><stop offset="0%" stop-color="#fff" stop-opacity=".5"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+    <g stroke="rgba(255,255,255,.15)" stroke-width=".3" fill="none">
+      <line x1="100" y1="100" x2="300" y2="200"/><line x1="300" y1="200" x2="500" y2="150"/>
+      <line x1="500" y1="150" x2="700" y2="300"/><line x1="700" y1="300" x2="900" y2="200"/>
+      <line x1="900" y1="200" x2="1100" y2="350"/><line x1="200" y1="400" x2="400" y2="350"/>
+      <line x1="400" y1="350" x2="600" y2="500"/><line x1="600" y1="500" x2="800" y2="450"/>
+      <line x1="800" y1="450" x2="1000" y2="600"/><line x1="300" y1="200" x2="400" y2="350"/>
+      <line x1="500" y1="150" x2="600" y2="500"/><line x1="700" y1="300" x2="800" y2="450"/>
+      <line x1="150" y1="600" x2="350" y2="550"/><line x1="350" y1="550" x2="600" y2="700"/>
+      <line x1="600" y1="700" x2="850" y2="650"/><line x1="850" y1="650" x2="1050" y2="750"/>
+      <line x1="400" y1="350" x2="350" y2="550"/><line x1="800" y1="450" x2="850" y2="650"/>
+      <line x1="900" y1="200" x2="1000" y2="600"/>
+    </g>
+    <g fill="url(#ng)">
+      <circle cx="100" cy="100" r="3"/><circle cx="300" cy="200" r="4"/><circle cx="500" cy="150" r="3"/>
+      <circle cx="700" cy="300" r="4"/><circle cx="900" cy="200" r="3"/><circle cx="1100" cy="350" r="3"/>
+      <circle cx="200" cy="400" r="3"/><circle cx="400" cy="350" r="4"/><circle cx="600" cy="500" r="4"/>
+      <circle cx="800" cy="450" r="3"/><circle cx="1000" cy="600" r="4"/>
+      <circle cx="150" cy="600" r="3"/><circle cx="350" cy="550" r="4"/><circle cx="600" cy="700" r="3"/>
+      <circle cx="850" cy="650" r="4"/><circle cx="1050" cy="750" r="3"/>
+    </g>
+  </svg>
+</div>
+
+<main>
+
+<!-- ── Nav ── -->
 <nav>
   <div class="inner">
     <div class="nav-name">Sanjay Venkat S</div>
@@ -145,7 +253,7 @@ footer .right a:hover{color:var(--text);opacity:1}
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
-      <a href="#contact" class="cta">Contact</a>
+      <a href="#contact" class="nav-cta">Contact ↗</a>
     </div>
   </div>
 </nav>
@@ -154,397 +262,266 @@ footer .right a:hover{color:var(--text);opacity:1}
 
 <!-- ── Hero ── -->
 <section class="hero" id="home">
-  <div class="label">Open to opportunities</div>
-  <h1>Generative AI Engineer <em>building production LLM systems</em></h1>
-  <p>Two years shipping RAG pipelines, Vision-Language Models, and LLM evaluation frameworks at EY and HCLTech — deployed on Azure and AWS at enterprise scale.</p>
-  <div class="hero-links">
-    <a href="mailto:sanjayvenkat.san5@gmail.com" class="primary">Get in touch</a>
-    <a href="https://github.com/sanjay-venkat" target="_blank" class="ghost">GitHub</a>
-    <a href="https://www.linkedin.com/in/sanjay-venkat-s" target="_blank" class="ghost">LinkedIn</a>
+  <div class="hero-badge"><span class="dot"></span> Open to Opportunities</div>
+  <h1>Generative AI Engineer<br><span class="grad">Building Production LLM Systems</span></h1>
+  <div class="typed-wrap"><span class="typed" id="typed"></span><span class="cursor"></span></div>
+  <p>Two years shipping RAG pipelines, Vision-Language Models, and LLM evaluation frameworks at EY and HCLTech — deployed on Azure & AWS at enterprise scale.</p>
+  <div class="hero-btns">
+    <a href="mailto:sanjayvenkat.san5@gmail.com" class="btn btn-grad">Get in touch →</a>
+    <a href="https://github.com/sanjay-venkat" target="_blank" class="btn btn-glass">GitHub</a>
+    <a href="https://www.linkedin.com/in/sanjay-venkat-s" target="_blank" class="btn btn-glass">LinkedIn</a>
   </div>
   <div class="stats">
-    <div class="stat"><div class="stat-val">600+</div><div class="stat-lbl">Queries Automated</div></div>
-    <div class="stat"><div class="stat-val">5×</div><div class="stat-lbl">Throughput Gain</div></div>
-    <div class="stat"><div class="stat-val">93%</div><div class="stat-lbl">Detection Accuracy</div></div>
-    <div class="stat"><div class="stat-val">28%</div><div class="stat-lbl">Latency Reduced</div></div>
+    <div class="stat"><div class="stat-val s1" data-target="600" data-suffix="+">0</div><div class="stat-lbl">Queries Automated</div></div>
+    <div class="stat"><div class="stat-val s2" data-target="5" data-suffix="×">0</div><div class="stat-lbl">Throughput Gain</div></div>
+    <div class="stat"><div class="stat-val s3" data-target="93" data-suffix="%">0</div><div class="stat-lbl">Detection Accuracy</div></div>
+    <div class="stat"><div class="stat-val s4" data-target="28" data-suffix="%">0</div><div class="stat-lbl">Latency Reduced</div></div>
   </div>
 </section>
 
-</div><div class="rule"></div><div class="wrap">
+</div><div class="divider"></div><div class="wrap">
 
 <!-- ── Experience ── -->
 <section id="experience">
   <div class="sh">
-    <div class="sh-label">Experience</div>
-    <div class="sh-title">Where I've shipped</div>
+    <div class="sh-label c1">💼 Experience</div>
+    <div class="sh-title">Where I've Shipped</div>
   </div>
 
-  <div class="exp-item">
-    <div class="exp-date exp-current">Nov 2025 — Now</div>
-    <div>
+  <div class="exp-item reveal">
+    <div class="exp-top">
       <div class="exp-role">AI Engineer (Advance Associate)</div>
-      <div class="exp-co">EY GDS</div>
-      <ul class="exp-points">
-        <li>Built a RAG system answering 600+ audit questions from PDFs with reranking and parallel multi-LLM inference — 5× throughput, 28% lower latency</li>
-        <li>Designed VLM pipeline extracting structured tables from unstructured PDFs using Azure Document Intelligence</li>
-        <li>Led LLM red-teaming with Ragas, DeepEval, and PyRIT — monitoring hallucination, prompt injection, and drift</li>
-        <li>Deployed all pipelines as FastAPI services on Azure Functions</li>
-      </ul>
+      <div class="exp-badge current">Nov 2025 — Present</div>
     </div>
+    <div class="exp-co">EY GDS <span>· Global Delivery Services</span></div>
+    <ul class="exp-points">
+      <li>Built RAG system answering 600+ audit questions with reranking and parallel multi-LLM inference — 5× throughput, 28% lower latency</li>
+      <li>Designed VLM pipeline extracting structured tables from unstructured PDFs using Azure Document Intelligence</li>
+      <li>Led LLM red-teaming with Ragas, DeepEval, PyRIT — monitoring hallucination, prompt injection, drift</li>
+      <li>Deployed pipelines as FastAPI services on Azure Functions for scalable automation</li>
+    </ul>
   </div>
 
-  <div class="exp-item">
-    <div class="exp-date">Jul 2024 — Oct 2025</div>
-    <div>
+  <div class="exp-item reveal">
+    <div class="exp-top">
       <div class="exp-role">Senior Software Engineer</div>
-      <div class="exp-co">HCLTech</div>
-      <ul class="exp-points">
-        <li>Production document intelligence pipeline — object detection + OCR + table extraction at 93% accuracy</li>
-        <li>Deployed VLM models on edge devices using C++, ONNX for real-time document processing</li>
-        <li>Built enterprise LLM features: summarization, RAG search, prompt-based test generation</li>
-      </ul>
+      <div class="exp-badge past">Jul 2024 — Oct 2025</div>
     </div>
+    <div class="exp-co">HCLTech</div>
+    <ul class="exp-points">
+      <li>Production document intelligence — object detection + OCR + table extraction at 93% accuracy</li>
+      <li>Deployed VLM on edge devices using C++, ONNX for real-time document processing</li>
+      <li>Built enterprise LLM features: summarization, RAG search, prompt-based test generation</li>
+    </ul>
   </div>
 
-  <div class="exp-item">
-    <div class="exp-date">Feb 2024 — Jul 2024</div>
-    <div>
+  <div class="exp-item reveal">
+    <div class="exp-top">
       <div class="exp-role">Academic Trainee</div>
-      <div class="exp-co">HCLTech</div>
-      <ul class="exp-points">
-        <li>Deep learning models for document quality analysis and noise classification</li>
-        <li>GAN-based document restoration — removing background noise from scanned documents</li>
-      </ul>
+      <div class="exp-badge past">Feb 2024 — Jul 2024</div>
     </div>
+    <div class="exp-co">HCLTech</div>
+    <ul class="exp-points">
+      <li>Deep learning for document quality analysis and noise classification</li>
+      <li>GAN-based document restoration — background noise removal from scanned documents</li>
+    </ul>
   </div>
 </section>
 
-</div><div class="rule"></div><div class="wrap">
+</div><div class="divider"></div><div class="wrap">
 
 <!-- ── Projects ── -->
 <section id="projects">
   <div class="sh">
-    <div class="sh-label">Projects</div>
-    <div class="sh-title">What I've built</div>
+    <div class="sh-label c2">🚀 Projects</div>
+    <div class="sh-title">What I've Built</div>
   </div>
 
-  <!-- 1 -->
-  <div class="proj">
-    <div class="proj-top">
-      <div class="proj-name">AuditLens AI</div>
-      <div class="proj-badges">
-        <span class="proj-badge prod">Production</span>
-        <span class="proj-badge pvt">Private</span>
+  <!-- ★ FLAGSHIP — New personal project -->
+  <div class="flagship reveal">
+    <div class="flagship-label">Flagship Personal Project — 2026</div>
+    <h3>NeuralForge — Multi-Modal Agentic AI Framework</h3>
+    <div class="sub">An open-source framework for building production-grade multi-modal agentic AI applications. Combines document understanding, multi-agent orchestration, real-time tool use, and built-in evaluation into a single deployable pipeline — designed as the missing layer between LangChain and production.</div>
+    <div class="features">
+      <div class="feat"><span class="ic i1">⚡</span> Multi-agent DAG orchestration with LangGraph</div>
+      <div class="feat"><span class="ic i2">👁️</span> Vision + text multi-modal RAG pipeline</div>
+      <div class="feat"><span class="ic i3">🔧</span> Dynamic tool-use with function calling</div>
+      <div class="feat"><span class="ic i4">📊</span> Built-in Ragas + DeepEval harness</div>
+      <div class="feat"><span class="ic i5">🔄</span> Streaming responses with async FastAPI</div>
+      <div class="feat"><span class="ic i6">🐳</span> One-command Docker deployment</div>
+    </div>
+    <div class="proj-tags">
+      <span class="ptag">LangGraph</span><span class="ptag">LangChain</span><span class="ptag">GPT-4V</span><span class="ptag">FastAPI</span><span class="ptag">Ragas</span><span class="ptag">Docker</span><span class="ptag">Vector DB</span><span class="ptag">ONNX</span><span class="ptag">Async Python</span>
+    </div>
+    <a href="https://github.com/sanjay-venkat" target="_blank" class="proj-link" style="margin-top:.75rem">View on GitHub →</a>
+  </div>
+
+  <div class="proj-grid">
+
+    <div class="proj-card c1 reveal">
+      <div class="proj-inner">
+        <div class="proj-top"><div class="proj-name">AuditLens AI</div><div class="proj-badges"><span class="proj-badge badge-prod">Production</span><span class="proj-badge badge-pvt">Private</span></div></div>
+        <div class="proj-desc">Enterprise RAG system automating 600+ audit queries. Hybrid retrieval with reranking and parallel multi-LLM inference on Azure.</div>
+        <div class="proj-metrics"><span class="pm m1"><b>600+</b> queries</span><span class="pm m2"><b>5×</b> throughput</span><span class="pm m3"><b>−28%</b> latency</span></div>
+        <div class="proj-tags"><span class="ptag">Azure OpenAI</span><span class="ptag">LangChain</span><span class="ptag">FastAPI</span><span class="ptag">Reranking</span></div>
       </div>
     </div>
-    <div class="proj-desc">Enterprise RAG system automating 600+ audit queries from PDF documents. Hybrid retrieval with reranking, parallel inference across multiple LLM instances, deployed as FastAPI microservices on Azure Functions.</div>
-    <div class="proj-meta">
-      <span class="proj-metric"><b>600+</b> queries</span>
-      <span class="proj-metric"><b>5×</b> throughput</span>
-      <span class="proj-metric"><b>−28%</b> latency</span>
-    </div>
-    <div class="proj-tags"><span class="proj-tag">Azure OpenAI</span><span class="proj-tag">LangChain</span><span class="proj-tag">FastAPI</span><span class="proj-tag">Reranking</span><span class="proj-tag">Azure Functions</span></div>
-  </div>
 
-  <!-- 2 -->
-  <div class="proj">
-    <div class="proj-top">
-      <div class="proj-name">DocForge VLM</div>
-      <div class="proj-badges">
-        <span class="proj-badge prod">Production</span>
-        <span class="proj-badge pvt">Private</span>
+    <div class="proj-card c2 reveal">
+      <div class="proj-inner">
+        <div class="proj-top"><div class="proj-name">DocForge VLM</div><div class="proj-badges"><span class="proj-badge badge-prod">Production</span><span class="proj-badge badge-pvt">Private</span></div></div>
+        <div class="proj-desc">Vision-Language pipeline for structured table extraction from unstructured PDFs. Edge-deployable with C++ and ONNX.</div>
+        <div class="proj-metrics"><span class="pm m3"><b>93%</b> accuracy</span><span class="pm m4"><b>Edge</b> deployed</span><span class="pm m5"><b>RT</b> processing</span></div>
+        <div class="proj-tags"><span class="ptag">Azure Doc Intel</span><span class="ptag">GPT-4V</span><span class="ptag">C++</span><span class="ptag">ONNX</span><span class="ptag">YOLO</span></div>
       </div>
     </div>
-    <div class="proj-desc">Multi-modal pipeline using Vision-Language Models for structured table extraction from unstructured PDFs. Edge-deployable variant using C++ and ONNX for real-time processing on embedded hardware.</div>
-    <div class="proj-meta">
-      <span class="proj-metric"><b>93%</b> accuracy</span>
-      <span class="proj-metric"><b>Edge</b> deployed</span>
-      <span class="proj-metric"><b>RT</b> processing</span>
-    </div>
-    <div class="proj-tags"><span class="proj-tag">Azure Doc Intel</span><span class="proj-tag">GPT-4V</span><span class="proj-tag">C++</span><span class="proj-tag">ONNX</span><span class="proj-tag">YOLO</span><span class="proj-tag">OCR</span></div>
-  </div>
 
-  <!-- 3 -->
-  <div class="proj">
-    <div class="proj-top">
-      <div class="proj-name">LLM RedTeam Suite</div>
-      <div class="proj-badges">
-        <span class="proj-badge sec">AI Safety</span>
-        <span class="proj-badge pvt">Private</span>
+    <div class="proj-card c3 reveal">
+      <div class="proj-inner">
+        <div class="proj-top"><div class="proj-name">LLM RedTeam Suite</div><div class="proj-badges"><span class="proj-badge badge-sec">AI Safety</span><span class="proj-badge badge-pvt">Private</span></div></div>
+        <div class="proj-desc">Red-teaming framework tracking hallucination, prompt injection, and model drift with automated adversarial testing in production.</div>
+        <div class="proj-metrics"><span class="pm m4"><b>3</b> eval engines</span><span class="pm m6"><b>24/7</b> monitoring</span></div>
+        <div class="proj-tags"><span class="ptag">Ragas</span><span class="ptag">DeepEval</span><span class="ptag">PyRIT</span><span class="ptag">Langfuse</span></div>
       </div>
     </div>
-    <div class="proj-desc">Evaluation and red-teaming framework tracking hallucination, prompt injection, and model drift in production LLM deployments. Automated adversarial testing pipelines with continuous monitoring.</div>
-    <div class="proj-meta">
-      <span class="proj-metric"><b>3</b> eval engines</span>
-      <span class="proj-metric"><b>24/7</b> monitoring</span>
-      <span class="proj-metric"><b>Prod</b> deployed</span>
-    </div>
-    <div class="proj-tags"><span class="proj-tag">Ragas</span><span class="proj-tag">DeepEval</span><span class="proj-tag">PyRIT</span><span class="proj-tag">Langfuse</span><span class="proj-tag">Red-teaming</span></div>
-  </div>
 
-  <!-- 4 — NEW -->
-  <div class="proj">
-    <div class="proj-top">
-      <div class="proj-name">AgentFlow — Multi-Agent Orchestrator</div>
-      <div class="proj-badges">
-        <span class="proj-badge prod">Production</span>
-        <span class="proj-badge pvt">Private</span>
+    <div class="proj-card c4 reveal">
+      <div class="proj-inner">
+        <div class="proj-top"><div class="proj-name">AgentFlow</div><div class="proj-badges"><span class="proj-badge badge-prod">Production</span><span class="proj-badge badge-pvt">Private</span></div></div>
+        <div class="proj-desc">Multi-agent pipeline coordinating specialized LLM agents via LangGraph DAG with HITL checkpoints for enterprise workflows.</div>
+        <div class="proj-metrics"><span class="pm m1"><b>DAG</b> architecture</span><span class="pm m5"><b>4</b> agents</span><span class="pm m6"><b>HITL</b> enabled</span></div>
+        <div class="proj-tags"><span class="ptag">LangGraph</span><span class="ptag">LangChain</span><span class="ptag">Azure OpenAI</span><span class="ptag">Async</span></div>
       </div>
     </div>
-    <div class="proj-desc">Multi-agent pipeline coordinating specialized LLM agents across enterprise workflows using LangGraph. Agents handle document routing, question analysis, answer synthesis, and quality verification in a DAG with human-in-the-loop checkpoints.</div>
-    <div class="proj-meta">
-      <span class="proj-metric"><b>DAG</b> architecture</span>
-      <span class="proj-metric"><b>4</b> agent nodes</span>
-      <span class="proj-metric"><b>HITL</b> enabled</span>
-    </div>
-    <div class="proj-tags"><span class="proj-tag">LangGraph</span><span class="proj-tag">LangChain</span><span class="proj-tag">Azure OpenAI</span><span class="proj-tag">FastAPI</span><span class="proj-tag">Async Agents</span></div>
-  </div>
 
-  <!-- 5 — NEW -->
-  <div class="proj">
-    <div class="proj-top">
-      <div class="proj-name">TestGen AI — Automated Test Case Generator</div>
-      <div class="proj-badges">
-        <span class="proj-badge prod">Production</span>
-        <span class="proj-badge pvt">Private</span>
+    <div class="proj-card c5 reveal">
+      <div class="proj-inner">
+        <div class="proj-top"><div class="proj-name">TestGen AI</div><div class="proj-badges"><span class="proj-badge badge-prod">Production</span><span class="proj-badge badge-pvt">Private</span></div></div>
+        <div class="proj-desc">LLM system generating structured test cases from requirements. Automates scenario generation, edge-cases, and acceptance criteria.</div>
+        <div class="proj-metrics"><span class="pm m5"><b>70%</b> effort saved</span><span class="pm m1"><b>Enterprise</b> QA</span></div>
+        <div class="proj-tags"><span class="ptag">OpenAI</span><span class="ptag">Prompt Eng</span><span class="ptag">FastAPI</span><span class="ptag">Structured Output</span></div>
       </div>
     </div>
-    <div class="proj-desc">Prompt-engineered LLM system generating structured test cases from software requirements. Reduced manual testing effort by automating scenario generation, edge-case identification, and acceptance criteria extraction for enterprise QA workflows.</div>
-    <div class="proj-meta">
-      <span class="proj-metric"><b>70%</b> effort saved</span>
-      <span class="proj-metric"><b>Enterprise</b> QA</span>
-    </div>
-    <div class="proj-tags"><span class="proj-tag">OpenAI API</span><span class="proj-tag">Prompt Engineering</span><span class="proj-tag">FastAPI</span><span class="proj-tag">Structured Output</span></div>
-  </div>
 
-  <!-- 6 — NEW -->
-  <div class="proj">
-    <div class="proj-top">
-      <div class="proj-name">Enterprise Semantic Search Engine</div>
-      <div class="proj-badges">
-        <span class="proj-badge prod">Production</span>
-        <span class="proj-badge pvt">Private</span>
+    <div class="proj-card c6 reveal">
+      <div class="proj-inner">
+        <div class="proj-top"><div class="proj-name">Semantic Search Engine</div><div class="proj-badges"><span class="proj-badge badge-prod">Production</span><span class="proj-badge badge-pvt">Private</span></div></div>
+        <div class="proj-desc">Hybrid BM25 + dense retrieval over thousands of internal documents with contextual reranking and source attribution.</div>
+        <div class="proj-metrics"><span class="pm m2"><b>Hybrid</b> retrieval</span><span class="pm m3"><b>1000s</b> docs</span></div>
+        <div class="proj-tags"><span class="ptag">Vector DB</span><span class="ptag">BM25</span><span class="ptag">Embeddings</span><span class="ptag">Reranking</span></div>
       </div>
     </div>
-    <div class="proj-desc">Vector-based semantic search system indexing thousands of internal documents with hybrid BM25 + dense retrieval. Powers natural language querying across enterprise knowledge bases with contextual reranking and source attribution.</div>
-    <div class="proj-meta">
-      <span class="proj-metric"><b>Hybrid</b> retrieval</span>
-      <span class="proj-metric"><b>1000s</b> documents</span>
-    </div>
-    <div class="proj-tags"><span class="proj-tag">Vector DB</span><span class="proj-tag">BM25</span><span class="proj-tag">Embeddings</span><span class="proj-tag">Reranking</span><span class="proj-tag">FastAPI</span></div>
-  </div>
 
-  <!-- 7 — NEW -->
-  <div class="proj">
-    <div class="proj-top">
-      <div class="proj-name">LLM Summarization Pipeline</div>
-      <div class="proj-badges">
-        <span class="proj-badge prod">Production</span>
-        <span class="proj-badge pvt">Private</span>
+    <div class="proj-card c1 reveal">
+      <div class="proj-inner">
+        <div class="proj-top"><div class="proj-name">LLM Summarization Pipeline</div><div class="proj-badges"><span class="proj-badge badge-prod">Production</span><span class="proj-badge badge-pvt">Private</span></div></div>
+        <div class="proj-desc">Enterprise summarization for long-form PDFs and contracts using recursive chunking with map-reduce and configurable detail levels.</div>
+        <div class="proj-metrics"><span class="pm m4"><b>Long-form</b> docs</span><span class="pm m2"><b>Map-Reduce</b></span></div>
+        <div class="proj-tags"><span class="ptag">LangChain</span><span class="ptag">Azure OpenAI</span><span class="ptag">Chunking</span><span class="ptag">PDF</span></div>
       </div>
     </div>
-    <div class="proj-desc">Enterprise document summarization system handling long-form PDFs, contracts, and audit reports. Implements recursive chunking with map-reduce summarization and configurable detail levels for different stakeholders.</div>
-    <div class="proj-meta">
-      <span class="proj-metric"><b>Long-form</b> docs</span>
-      <span class="proj-metric"><b>Map-Reduce</b> pattern</span>
-    </div>
-    <div class="proj-tags"><span class="proj-tag">LangChain</span><span class="proj-tag">Azure OpenAI</span><span class="proj-tag">Recursive Chunking</span><span class="proj-tag">PDF Parsing</span></div>
-  </div>
 
-  <!-- 8 -->
-  <div class="proj">
-    <div class="proj-top">
-      <div class="proj-name">DocNoise GAN</div>
-      <div class="proj-badges">
-        <span class="proj-badge prod">Research</span>
-        <span class="proj-badge pvt">Private</span>
+    <div class="proj-card c3 reveal">
+      <div class="proj-inner">
+        <div class="proj-top"><div class="proj-name">DocNoise GAN</div><div class="proj-badges"><span class="proj-badge badge-prod">Research</span><span class="proj-badge badge-pvt">Private</span></div></div>
+        <div class="proj-desc">GAN-based restoration removing noise and stains from scanned documents, paired with an automated noise classifier.</div>
+        <div class="proj-tags"><span class="ptag">PyTorch</span><span class="ptag">GANs</span><span class="ptag">OpenCV</span><span class="ptag">Image Processing</span></div>
       </div>
     </div>
-    <div class="proj-desc">GAN-based restoration model removing background noise, stains, and artifacts from scanned documents. Paired with a noise classifier for automated preprocessing in document intelligence pipelines.</div>
-    <div class="proj-tags"><span class="proj-tag">PyTorch</span><span class="proj-tag">GANs</span><span class="proj-tag">OpenCV</span><span class="proj-tag">Image Processing</span></div>
-  </div>
 
-  <!-- 9 -->
-  <div class="proj">
-    <div class="proj-top">
-      <div class="proj-name">HoneyPot SPY</div>
-      <div class="proj-badges">
-        <span class="proj-badge oss">Open Source</span>
+    <div class="proj-card c2 reveal">
+      <div class="proj-inner">
+        <div class="proj-top"><div class="proj-name">HoneyPot SPY</div><div class="proj-badges"><span class="proj-badge badge-oss">Open Source</span></div></div>
+        <div class="proj-desc">Honeypot behavioral analysis modeling attacker activity as FSM transitions with anomaly alerting from session graphs.</div>
+        <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">FSM</span><span class="ptag">Anomaly Detection</span></div>
+        <a href="https://github.com/sanjay-venkat/Honey_Pot_SPY" target="_blank" class="proj-link">GitHub →</a>
       </div>
     </div>
-    <div class="proj-desc">Honeypot-based behavioral analysis system modeling attacker activity as finite-state machine transitions with anomaly alerting from session behavior graphs.</div>
-    <div class="proj-meta">
-      <a href="https://github.com/sanjay-venkat/Honey_Pot_SPY" target="_blank" style="font-family:var(--mono);font-size:.72rem">View on GitHub →</a>
-    </div>
-    <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">FSM</span><span class="proj-tag">Anomaly Detection</span><span class="proj-tag">Network Security</span></div>
-  </div>
 
-  <!-- 10 -->
-  <div class="proj">
-    <div class="proj-top">
-      <div class="proj-name">Shopify Insights Fetcher</div>
-      <div class="proj-badges">
-        <span class="proj-badge oss">Open Source</span>
+    <div class="proj-card c5 reveal">
+      <div class="proj-inner">
+        <div class="proj-top"><div class="proj-name">Shopify Insights Fetcher</div><div class="proj-badges"><span class="proj-badge badge-oss">Open Source</span></div></div>
+        <div class="proj-desc">FastAPI backend scraping Shopify stores, extracting structured brand data via local LLM as clean JSON.</div>
+        <div class="proj-tags"><span class="ptag">FastAPI</span><span class="ptag">Ollama</span><span class="ptag">Scraping</span></div>
+        <a href="https://github.com/sanjay-venkat/Shopify-Insights-Fetcher" target="_blank" class="proj-link">GitHub →</a>
       </div>
     </div>
-    <div class="proj-desc">FastAPI backend scraping Shopify stores and extracting structured brand/product data via local LLM, returned as clean JSON.</div>
-    <div class="proj-meta">
-      <a href="https://github.com/sanjay-venkat/Shopify-Insights-Fetcher" target="_blank" style="font-family:var(--mono);font-size:.72rem">View on GitHub →</a>
-    </div>
-    <div class="proj-tags"><span class="proj-tag">FastAPI</span><span class="proj-tag">Ollama</span><span class="proj-tag">Web Scraping</span><span class="proj-tag">Structured Output</span></div>
-  </div>
 
-  <!-- 11 -->
-  <div class="proj">
-    <div class="proj-top">
-      <div class="proj-name">Support Bot — RAG</div>
-      <div class="proj-badges">
-        <span class="proj-badge oss">Open Source</span>
+    <div class="proj-card c4 reveal">
+      <div class="proj-inner">
+        <div class="proj-top"><div class="proj-name">Support Bot — RAG</div><div class="proj-badges"><span class="proj-badge badge-oss">Open Source</span></div></div>
+        <div class="proj-desc">Document Q&A chatbot with RAG over custom knowledge bases and source attribution.</div>
+        <div class="proj-tags"><span class="ptag">LangChain</span><span class="ptag">Vector DB</span><span class="ptag">Embeddings</span></div>
+        <a href="https://github.com/sanjay-venkat/Support-Bot" target="_blank" class="proj-link">GitHub →</a>
       </div>
     </div>
-    <div class="proj-desc">Document Q&A chatbot using Retrieval-Augmented Generation over custom knowledge bases with source attribution.</div>
-    <div class="proj-meta">
-      <a href="https://github.com/sanjay-venkat/Support-Bot" target="_blank" style="font-family:var(--mono);font-size:.72rem">View on GitHub →</a>
-    </div>
-    <div class="proj-tags"><span class="proj-tag">LangChain</span><span class="proj-tag">Vector DB</span><span class="proj-tag">Embeddings</span><span class="proj-tag">Python</span></div>
-  </div>
 
+  </div>
 </section>
 
-</div><div class="rule"></div><div class="wrap">
+</div><div class="divider"></div><div class="wrap">
 
 <!-- ── Skills ── -->
 <section id="skills">
   <div class="sh">
-    <div class="sh-label">Skills</div>
-    <div class="sh-title">Technical stack</div>
+    <div class="sh-label c3">🧠 Skills</div>
+    <div class="sh-title">Technical Stack</div>
   </div>
-
-  <div class="skill-group">
-    <div class="skill-label">Generative AI & LLMs</div>
-    <div class="skill-list">
-      <span class="skill">RAG Pipelines</span>
-      <span class="skill">LangChain</span>
-      <span class="skill">LangGraph</span>
-      <span class="skill">Prompt Engineering</span>
-      <span class="skill">LLM Fine-tuning</span>
-      <span class="skill">Multi-Agent Pipelines</span>
-      <span class="skill">Azure OpenAI</span>
-      <span class="skill">Amazon Bedrock</span>
-      <span class="skill">Ollama</span>
+  <div class="skills-wrap reveal">
+    <div class="skill-box">
+      <div class="skill-box-title sbt1"><span class="ico">⚡</span> Generative AI & LLMs</div>
+      <span class="stag t1">RAG Pipelines</span><span class="stag t1">LangChain</span><span class="stag t1">LangGraph</span><span class="stag t1">Prompt Engineering</span><span class="stag t1">LLM Fine-tuning</span><span class="stag t1">Multi-Agent</span><span class="stag t1">Azure OpenAI</span><span class="stag t1">Bedrock</span><span class="stag t1">Ollama</span>
     </div>
-  </div>
-
-  <div class="skill-group">
-    <div class="skill-label">AI Evaluation & Safety</div>
-    <div class="skill-list">
-      <span class="skill">Ragas</span>
-      <span class="skill">DeepEval</span>
-      <span class="skill">PyRIT</span>
-      <span class="skill">Langfuse</span>
-      <span class="skill">RAG Evaluation</span>
-      <span class="skill">Red-Teaming</span>
-      <span class="skill">Model Benchmarking</span>
+    <div class="skill-box">
+      <div class="skill-box-title sbt2"><span class="ico">🛡️</span> AI Evaluation & Safety</div>
+      <span class="stag t2">Ragas</span><span class="stag t2">DeepEval</span><span class="stag t2">PyRIT</span><span class="stag t2">Langfuse</span><span class="stag t2">RAG Evaluation</span><span class="stag t2">Red-Teaming</span><span class="stag t2">Benchmarking</span>
     </div>
-  </div>
-
-  <div class="skill-group">
-    <div class="skill-label">ML & Deep Learning</div>
-    <div class="skill-list">
-      <span class="skill">PyTorch</span>
-      <span class="skill">TensorFlow</span>
-      <span class="skill">YOLO</span>
-      <span class="skill">Computer Vision</span>
-      <span class="skill">GANs</span>
-      <span class="skill">Neural Networks</span>
+    <div class="skill-box">
+      <div class="skill-box-title sbt3"><span class="ico">🔬</span> ML & Deep Learning</div>
+      <span class="stag t3">PyTorch</span><span class="stag t3">TensorFlow</span><span class="stag t3">YOLO</span><span class="stag t3">Computer Vision</span><span class="stag t3">GANs</span><span class="stag t3">Neural Networks</span>
     </div>
-  </div>
-
-  <div class="skill-group">
-    <div class="skill-label">Languages & Deployment</div>
-    <div class="skill-list">
-      <span class="skill">Python</span>
-      <span class="skill">C++</span>
-      <span class="skill">FastAPI</span>
-      <span class="skill">Azure Functions</span>
-      <span class="skill">Docker</span>
-      <span class="skill">ONNX</span>
-      <span class="skill">Azure</span>
-      <span class="skill">AWS</span>
-      <span class="skill">Git</span>
-      <span class="skill">Linux</span>
+    <div class="skill-box">
+      <div class="skill-box-title sbt4"><span class="ico">☁️</span> Languages & Deploy</div>
+      <span class="stag t4">Python</span><span class="stag t4">C++</span><span class="stag t4">FastAPI</span><span class="stag t4">Azure Functions</span><span class="stag t4">Docker</span><span class="stag t4">ONNX</span><span class="stag t4">Azure</span><span class="stag t4">AWS</span><span class="stag t4">Git</span><span class="stag t4">Linux</span>
     </div>
   </div>
 </section>
 
-</div><div class="rule"></div><div class="wrap">
+</div><div class="divider"></div><div class="wrap">
 
 <!-- ── Education ── -->
 <section id="education">
   <div class="sh">
-    <div class="sh-label">Education & Credentials</div>
+    <div class="sh-label c5">🎓 Education</div>
+    <div class="sh-title">Credentials</div>
   </div>
-
-  <div class="edu-row">
-    <div class="edu-left">
-      <div class="edu-deg">M.Tech — Cloud Computing & Blockchain</div>
-      <div class="edu-school">SRM Institute of Science and Technology</div>
-    </div>
-    <div class="edu-detail">2025 — Present · 9.5 GPA</div>
-  </div>
-  <div class="edu-row">
-    <div class="edu-left">
-      <div class="edu-deg">B.Tech — AI and Data Science</div>
-      <div class="edu-school">Sri Sairam Engineering College</div>
-    </div>
-    <div class="edu-detail">2020 — 2024 · 8.92 GPA</div>
-  </div>
-  <div class="edu-row">
-    <div class="edu-left">
-      <div class="edu-deg">IEEE Publication</div>
-      <div class="edu-school">Traffic Density Estimation — ICCST 2022</div>
-    </div>
-    <div class="edu-detail">IEEE Xplore · 2023</div>
-  </div>
-  <div class="edu-row">
-    <div class="edu-left">
-      <div class="edu-deg">Certifications</div>
-      <div class="edu-school">GenAI with LLMs (Coursera) · NPTEL: ML, Deep Learning, Data Science</div>
-    </div>
-    <div class="edu-detail">2023 — 2024</div>
+  <div class="reveal">
+    <div class="edu-card"><div class="edu-left"><div class="edu-deg">M.Tech — Cloud Computing & Blockchain</div><div class="edu-school">SRM Institute of Science and Technology</div></div><div class="edu-right">2025 — Present · 9.5 GPA</div></div>
+    <div class="edu-card"><div class="edu-left"><div class="edu-deg">B.Tech — AI and Data Science</div><div class="edu-school">Sri Sairam Engineering College</div></div><div class="edu-right">2020 — 2024 · 8.92 GPA</div></div>
+    <div class="edu-card"><div class="edu-left"><div class="edu-deg">IEEE Publication</div><div class="edu-school">Traffic Density Estimation — ICCST 2022, IEEE Xplore</div></div><div class="edu-right">Mar 2023</div></div>
+    <div class="edu-card"><div class="edu-left"><div class="edu-deg">Certifications</div><div class="edu-school">GenAI with LLMs (Coursera) · NPTEL: ML, Deep Learning, Data Science</div></div><div class="edu-right">2023 — 2024</div></div>
   </div>
 </section>
 
-</div><div class="rule"></div><div class="wrap">
+</div><div class="divider"></div><div class="wrap">
 
 <!-- ── Contact ── -->
 <section id="contact">
   <div class="sh">
-    <div class="sh-label">Get in touch</div>
-    <div class="sh-title">Let's work together</div>
+    <div class="sh-label c6">🤝 Contact</div>
+    <div class="sh-title">Let's Work Together</div>
   </div>
-
-  <div class="contact-row">
-    <a href="mailto:sanjayvenkat.san5@gmail.com" class="contact-item">
-      <div class="c-label">Email</div>
-      <div class="c-value">sanjayvenkat.san5@gmail.com</div>
-    </a>
-    <a href="tel:+918248695775" class="contact-item">
-      <div class="c-label">Phone</div>
-      <div class="c-value">+91 82486 95775</div>
-    </a>
-    <a href="https://www.linkedin.com/in/sanjay-venkat-s" target="_blank" class="contact-item">
-      <div class="c-label">LinkedIn</div>
-      <div class="c-value">sanjay-venkat-s</div>
-    </a>
-    <a href="https://github.com/sanjay-venkat" target="_blank" class="contact-item">
-      <div class="c-label">GitHub</div>
-      <div class="c-value">sanjay-venkat</div>
-    </a>
+  <div class="contact-grid reveal">
+    <a href="mailto:sanjayvenkat.san5@gmail.com" class="cc"><div class="cc-label l1">Email</div><div class="cc-value">sanjayvenkat.san5@gmail.com</div></a>
+    <a href="tel:+918248695775" class="cc"><div class="cc-label l2">Phone</div><div class="cc-value">+91 82486 95775</div></a>
+    <a href="https://www.linkedin.com/in/sanjay-venkat-s" target="_blank" class="cc"><div class="cc-label l3">LinkedIn</div><div class="cc-value">sanjay-venkat-s</div></a>
+    <a href="https://github.com/sanjay-venkat" target="_blank" class="cc"><div class="cc-label l4">GitHub</div><div class="cc-value">sanjay-venkat</div></a>
   </div>
 </section>
 
 </div>
+
+</main>
 
 <footer>
   <div class="inner">
@@ -557,5 +534,80 @@ footer .right a:hover{color:var(--text);opacity:1}
   </div>
 </footer>
 
+<script>
+// ── Scroll progress bar ──
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById('scrollProg').style.width=pct+'%';
+});
+
+// ── Typing effect ──
+const phrases=["RAG Pipelines · LLM Evaluation · Multi-Agent Systems","Vision-Language Models · Edge AI · Document Intelligence","Red-Teaming · Prompt Engineering · FastAPI Deployment"];
+let pi=0,ci=0,deleting=false;
+function typeLoop(){
+  const el=document.getElementById('typed');
+  const phrase=phrases[pi];
+  if(!deleting){
+    el.textContent=phrase.substring(0,ci+1);
+    ci++;
+    if(ci===phrase.length){deleting=true;setTimeout(typeLoop,2000);return}
+    setTimeout(typeLoop,40);
+  } else {
+    el.textContent=phrase.substring(0,ci-1);
+    ci--;
+    if(ci===0){deleting=false;pi=(pi+1)%phrases.length;setTimeout(typeLoop,400);return}
+    setTimeout(typeLoop,20);
+  }
+}
+typeLoop();
+
+// ── Counter animation ──
+const counters=document.querySelectorAll('.stat-val[data-target]');
+let counted=false;
+function animateCounters(){
+  if(counted)return;
+  const rect=document.querySelector('.stats').getBoundingClientRect();
+  if(rect.top<window.innerHeight*.9){
+    counted=true;
+    counters.forEach(el=>{
+      const target=+el.dataset.target;
+      const suffix=el.dataset.suffix||'';
+      const dur=1200;
+      const start=performance.now();
+      function step(now){
+        const p=Math.min((now-start)/dur,1);
+        const ease=1-Math.pow(1-p,3);
+        el.textContent=Math.round(target*ease)+suffix;
+        if(p<1)requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+}
+window.addEventListener('scroll',animateCounters);
+animateCounters();
+
+// ── Scroll reveal ──
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
+},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ── 3D tilt on project cards ──
+document.querySelectorAll('.proj-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`perspective(800px) rotateY(${x*8}deg) rotateX(${-y*8}deg) translateY(-4px)`;
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform='perspective(800px) rotateY(0) rotateX(0) translateY(0)';
+    card.style.transition='transform .4s ease';
+  });
+  card.addEventListener('mouseenter',()=>{card.style.transition='transform .1s ease'});
+});
+</script>
 </body>
 </html>
